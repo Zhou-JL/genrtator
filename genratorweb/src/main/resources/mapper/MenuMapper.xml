@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujl.demo.dao.MenuDao">
+	<resultMap id="MenuMap" type="com.zhoujl.demo.entity.Menu">
+		<id column="id" property="id" jdbcType="VARCHAR"/>
+		<result column="menu_name" property="menuName" jdbcType="VARCHAR"/>
+		<result column="menu_level" property="menuLevel" jdbcType="VARCHAR"/>
+		<result column="parent_menu_id" property="parentMenuId" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<sql id="colunms_sql">
+		a.id,a.menu_name,a.menu_level,a.parent_menu_id
+	</sql>
+
+	<sql id="condition_sql">
+		<if test="condition != null">
+			<if test="condition.id != null and condition.id != ''">
+				and a.id = #{condition.id}
+			</if>
+			<if test="condition.menuName != null and condition.menuName != ''">
+				and a.menu_name = #{condition.menuName}
+			</if>
+			<if test="condition.menuLevel != null and condition.menuLevel != ''">
+				and a.menu_level = #{condition.menuLevel}
+			</if>
+			<if test="condition.parentMenuId != null and condition.parentMenuId != ''">
+				and a.parent_menu_id = #{condition.parentMenuId}
+			</if>
+		</if>
+	</sql>
+
+
+
+	<sql id="map_sql">
+		<if test="map != null">
+			<if test="map.id != null and map.id != ''">
+				and a.id = #{condition.id}
+			</if>
+			<if test="map.menuName != null and map.menuName != ''">
+				and a.map = #{map.menuName}
+			</if>
+			<if test="map.menuLevel != null and map.menuLevel != ''">
+				and a.menu_level = #{map.menuLevel}
+			</if>
+			<if test="map.parentMenuId != null and map.parentMenuId != ''">
+				and a.parent_menu_id = #{map.parentMenuId}
+			</if>
+<!--			<if test="map != null and map.traddingOrgIdList != null ">-->
+<!--				<foreach collection="map.traddingOrgIdList" separator=","-->
+<!--						 open=" and tradding_org_id in (" close=")"-->
+<!--						 item="tmpTraddingOrgId"-->
+<!--				>#{tmpTraddingOrgId}</foreach>-->
+<!--			</if>-->
+<!--			<if test="map != null and map.startTime != null">-->
+<!--				<![CDATA[ and processinstance_end_date >=  #{  map.startTime }]]>-->
+<!--			</if>-->
+<!--			<if test="map != null and map.endTime != null">-->
+<!--				<![CDATA[ and processinstance_end_date <=  #{  map.endTime }]]>-->
+<!--			</if>-->
+		</if>
+	</sql>
+
+
+
+
+
+
+
+	<select id="getPagedValue" resultMap="MenuMap">
+		select <include refid="colunms_sql"/> from menu a
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+	<select id="getPagedValue1" resultMap="MenuMap">
+		select <include refid="colunms_sql"/> from menu a
+		<where>
+			<if test="keywords != null and keywords != ''">
+				and (1=2   OR a.id like '%${keywords}%'    OR a.menu_name like '%${keywords}%'    OR a.menu_level like '%${keywords}%'    OR a.parent_menu_id like '%${keywords}%'   )
+			</if>
+			<if test="condition!=null">
+				<include refid="condition_sql" />
+			</if>
+		</where>
+	</select>
+
+
+
+	<select id="getPagedValue2" resultMap="MenuMap">
+		select <include refid="colunms_sql"/> from menu a
+		<where>
+			<if test="keywords != null and keywords != ''">
+				and (1=2   OR a.id like '%${keywords}%'    OR a.menu_name like '%${keywords}%'    OR a.menu_level like '%${keywords}%'    OR a.parent_menu_id like '%${keywords}%')
+			</if>
+			<if test="condition != null">
+				<include refid="condition_sql" />
+			</if>
+			<if test="map != null">
+				<include refid="map_sql" />
+			</if>
+		</where>
+
+	</select>
+
+
+</mapper>

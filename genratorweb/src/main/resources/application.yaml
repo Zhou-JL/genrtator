@@ -1,0 +1,88 @@
+server:
+  port: 2052
+  servlet:
+    encoding:
+      force: true   #强制设置编码格式
+
+spring:
+  application:
+    name: genertator
+  datasource:
+    url: jdbc:mysql://47.105.161.220:3306/shirojwt?useSSL=false&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: Zhou236513
+    # 使用Druid数据源
+#    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      filters: stat
+      maxActive: 20
+      initialSize: 1
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+
+
+
+
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 30MB
+  mvc:
+    static-path-pattern: /static/**
+    resources:
+      static-locations: classpath:/static
+
+#mybatis配置
+mybatis:
+  base-packages: com.zhoujl.**.dao
+  mapper-locations: classpath*:/mapper/*.xml
+  type-aliases-package: com.zhoujl.**.entity
+  config-location: classpath:/mybatis/mybatis-config.xml
+
+#日志配置
+logging:
+  config: classpath:log4j2.xml
+  level:
+    com.shimain.springboot.mapper: DEBUG
+
+
+##系统变量
+finance:
+  file-server:
+    url: http://47.105.161.220:8010
+    public-file-url: /public/finance-public
+    upload-file-url: /upload/finance-upload
+
+
+
+
+#dubbo配置
+dubbo:
+  application:
+    name: consumer-web
+  registry:
+    address: zookeeper://47.105.161.220:2181
+  protocol:
+    port: 20880
+  scan:
+    base-packages: com.zhoujl.demo.rpcservice.service
+
+
+flowable:
+  #关闭定时任务JOB
+  async-executor-activate: false
+  database-schema-update: false
+  process:
+    definition-cache-limit: 100
+

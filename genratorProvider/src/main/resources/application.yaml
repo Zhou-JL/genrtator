@@ -1,0 +1,22 @@
+server:
+  port: 2053
+  servlet:
+    encoding:
+      force: true   #强制设置编码格式
+
+logging:
+  config: classpath:log4j2.xml
+  level:
+    com.shimain.springboot.mapper: DEBUG
+
+
+dubbo:
+  application:
+    name: provider-genrator
+  registry:
+    address: zookeeper://47.105.161.220:2181
+  scan:
+    base-packages: com.zhoujl.demo.rpcservice.service
+  protocol:
+    port: 20880
+

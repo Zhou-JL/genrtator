@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置，当设置成trace时，你会看到log4j2内部各种详细输出-->
+<!--monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数-->
+<configuration status="OFF">
+    <properties>
+        <!-- 服务器生产环境日志目录 -->
+        <property name="SERVER_HOME_PATH">../logs/</property>
+        <!-- 日志目录 -->
+        <property name="LOG_HOME">${SERVER_HOME_PATH}</property>
+        <!-- 日志备份目录 -->
+        <property name="BACKUP_HOME">{LOG_HOME}/backup</property>
+        <!-- 系统/服务名称 用于生成路径名称-->
+        <!-- 配置字典：tradding：工程、supervision:工程监督、zfcg:采购、cqjy:产权交易、cqsuper:产权监督、gtjy:国土交易、gtjd:国土监督-->
+        <!-- town:工程乡镇、pmint:文件服务器、pubservice:公共服务平台、ggfwts:通用服务平台/手动上报系统-->
+        <property name="SERVER_NAME">finance-business</property>
+    </properties>
+    <appenders>
+        <!-- 定义控制台输出 生产环境可以去掉-->
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <!--设置日志格式及颜色-->
+            <PatternLayout
+                    pattern="[%style{%d{HH:mm:ss.SSS}}{bright,green}][%highlight{%-5level}][%style{%.36c %-4L}{bright,yellow}]: %msg%n%style{%throwable}{red}"
+                    disableAnsi="false" noConsoleNoAnsi="false"/>
+        </Console>
+        <!-- 生产环境文件日志 -->
+        <RollingRandomAccessFile name="ProductEnvLog" fileName="${LOG_HOME}/current/${SERVER_NAME}.log"
+                                 filePattern="${LOG_HOME}/%date{yyyy-MM-dd}/${SERVER_NAME}/monitor-%d{yyyyMMdd-HH}.log">
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %.36c %-4L - %msg%xEx%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingRandomAccessFile>
+    </appenders>
+    <loggers>
+        <root level="info">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="ProductEnvLog"/>
+        </root>
+        <!--        <logger level="debug" name="cn.pinming"/>
+                <logger level="warn" name="org.apache.zookeeper.ZooKeeper"/>
+                <logger level="warn" name="springfox"/>
+                <logger level="warn" name="com.codingapi.tx"/>
+                <logger level="warn" name="org.springframework"/>
+                <logger level="warn" name="org.apache.shiro"/>
+                <logger level="warn" name="org.apache.cxf"/>
+                <logger level="warn" name="java.sql"/>
+                <logger level="warn" name="net.bull.javamelody"/>
+                <logger level="warn" name="com.alibaba.dubbo"/>
+                <logger level="warn" name="org.apache.tomcat"/>
+                <logger level="warn" name="com.codingapi.tx.dubbo"/>
+                <logger level="warn" name="cn.pinming.pmsuite.web.servlet"/>
+                <logger level="warn" name="cn.pinming.pmsuite.shiro.CustomerDefaultWebSecurityManager"/>-->
+
+
+        <logger level="debug" name="com.zhoujl.demo"/>
+    </loggers>
+
+</configuration>

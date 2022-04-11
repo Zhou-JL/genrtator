@@ -1,0 +1,48 @@
+2022-03-25 15:46:21.894 INFO  [main] StandaloneProcessEngineConfiguration 1000 - Found 2 Engine Configurators in total:
+2022-03-25 15:46:21.902 INFO  [main] StandaloneProcessEngineConfiguration 1002 - class org.flowable.eventregistry.impl.configurator.EventRegistryEngineConfigurator (priority:100000)
+2022-03-25 15:46:21.903 INFO  [main] StandaloneProcessEngineConfiguration 1002 - class org.flowable.idm.engine.configurator.IdmEngineConfigurator (priority:150000)
+2022-03-25 15:46:21.903 INFO  [main] StandaloneProcessEngineConfiguration 1028 - Executing beforeInit() of class org.flowable.eventregistry.impl.configurator.EventRegistryEngineConfigurator (priority:100000)
+2022-03-25 15:46:21.910 INFO  [main] StandaloneProcessEngineConfiguration 1028 - Executing beforeInit() of class org.flowable.idm.engine.configurator.IdmEngineConfigurator (priority:150000)
+2022-03-25 15:46:22.000 INFO  [main] StandaloneProcessEngineConfiguration 433  - Configuring Datasource with following properties (omitted password for security)
+2022-03-25 15:46:22.001 INFO  [main] StandaloneProcessEngineConfiguration 434  - datasource driver : com.mysql.jdbc.Driver
+2022-03-25 15:46:22.001 INFO  [main] StandaloneProcessEngineConfiguration 435  - datasource url : jdbc:mysql://47.105.161.220:3306/flowable-first?useSSL=false&useUnicode=true&characterEncoding=utf-8
+2022-03-25 15:46:22.001 INFO  [main] StandaloneProcessEngineConfiguration 436  - datasource user name : root
+2022-03-25 15:46:24.309 INFO  [main] .impl.async.DefaultAsyncTaskExecutor 154  - Creating thread pool queue of size 100
+2022-03-25 15:46:24.309 INFO  [main] .impl.async.DefaultAsyncTaskExecutor 159  - Creating thread factory with naming pattern flowable-async-job-executor-thread-%d
+2022-03-25 15:46:24.312 INFO  [main] .impl.async.DefaultAsyncTaskExecutor 164  - Creating executor service with corePoolSize 8, maxPoolSize 8 and keepAliveTime 5000
+2022-03-25 15:46:24.422 INFO  [main] StandaloneProcessEngineConfiguration 1035 - Executing configure() of class org.flowable.eventregistry.impl.configurator.EventRegistryEngineConfigurator (priority:100000)
+2022-03-25 15:46:24.568 INFO  [main] engine.impl.db.CommonDbSchemaManager 236  - performing create on common with resource org/flowable/common/db/create/flowable.mysql.create.common.sql
+2022-03-25 15:46:24.568 INFO  [main] engine.impl.db.CommonDbSchemaManager 252  - Found MySQL: majorVersion=5 minorVersion=7
+2022-03-25 15:46:29.392 INFO  [main] egistry.impl.EventRegistryEngineImpl 53   - EventRegistryEngine default created
+2022-03-25 15:46:29.535 INFO  [main] StandaloneProcessEngineConfiguration 1035 - Executing configure() of class org.flowable.idm.engine.configurator.IdmEngineConfigurator (priority:150000)
+2022-03-25 15:46:29.765 INFO  [main] dm.engine.impl.db.IdmDbSchemaManager 236  - performing create on identity with resource org/flowable/idm/db/create/flowable.mysql.create.identity.sql
+2022-03-25 15:46:29.765 INFO  [main] dm.engine.impl.db.IdmDbSchemaManager 252  - Found MySQL: majorVersion=5 minorVersion=7
+2022-03-25 15:46:31.191 INFO  [main] owable.idm.engine.impl.IdmEngineImpl 52   - IdmEngine default created
+2022-03-25 15:46:31.419 INFO  [main] .impl.db.IdentityLinkDbSchemaManager 236  - performing create on identitylink with resource org/flowable/identitylink/service/db/create/flowable.mysql.create.identitylink.sql
+2022-03-25 15:46:31.419 INFO  [main] .impl.db.IdentityLinkDbSchemaManager 252  - Found MySQL: majorVersion=5 minorVersion=7
+2022-03-25 15:46:32.030 INFO  [main] .impl.db.IdentityLinkDbSchemaManager 236  - performing create on identitylink.history with resource org/flowable/identitylink/service/db/create/flowable.mysql.create.identitylink.history.sql
+2022-03-25 15:46:32.031 INFO  [main] .impl.db.IdentityLinkDbSchemaManager 252  - Found MySQL: majorVersion=5 minorVersion=7
+2022-03-25 15:46:32.581 INFO  [main] ce.impl.db.EntityLinkDbSchemaManager 236  - performing create on entitylink with resource org/flowable/entitylink/service/db/create/flowable.mysql.create.entitylink.sql
+2022-03-25 15:46:32.581 INFO  [main] ce.impl.db.EntityLinkDbSchemaManager 252  - Found MySQL: majorVersion=5 minorVersion=7
+2022-03-25 15:46:33.014 INFO  [main] ce.impl.db.EntityLinkDbSchemaManager 236  - performing create on entitylink.history with resource org/flowable/entitylink/service/db/create/flowable.mysql.create.entitylink.history.sql
+2022-03-25 15:46:33.015 INFO  [main] ce.impl.db.EntityLinkDbSchemaManager 252  - Found MySQL: majorVersion=5 minorVersion=7
+2022-03-25 15:46:33.433 INFO  [main] .db.EventSubscriptionDbSchemaManager 236  - performing create on eventsubscription with resource org/flowable/eventsubscription/service/db/create/flowable.mysql.create.eventsubscription.sql
+2022-03-25 15:46:33.433 INFO  [main] .db.EventSubscriptionDbSchemaManager 252  - Found MySQL: majorVersion=5 minorVersion=7
+2022-03-25 15:46:33.702 INFO  [main] .service.impl.db.TaskDbSchemaManager 236  - performing create on task with resource org/flowable/task/service/db/create/flowable.mysql.create.task.sql
+2022-03-25 15:46:33.703 INFO  [main] .service.impl.db.TaskDbSchemaManager 252  - Found MySQL: majorVersion=5 minorVersion=7
+2022-03-25 15:46:34.234 INFO  [main] .service.impl.db.TaskDbSchemaManager 236  - performing create on task.history with resource org/flowable/task/service/db/create/flowable.mysql.create.task.history.sql
+2022-03-25 15:46:34.242 INFO  [main] .service.impl.db.TaskDbSchemaManager 252  - Found MySQL: majorVersion=5 minorVersion=7
+2022-03-25 15:46:34.796 INFO  [main] vice.impl.db.VariableDbSchemaManager 236  - performing create on variable with resource org/flowable/variable/service/db/create/flowable.mysql.create.variable.sql
+2022-03-25 15:46:34.796 INFO  [main] vice.impl.db.VariableDbSchemaManager 252  - Found MySQL: majorVersion=5 minorVersion=7
+2022-03-25 15:46:35.225 INFO  [main] vice.impl.db.VariableDbSchemaManager 236  - performing create on variable.history with resource org/flowable/variable/service/db/create/flowable.mysql.create.variable.history.sql
+2022-03-25 15:46:35.225 INFO  [main] vice.impl.db.VariableDbSchemaManager 252  - Found MySQL: majorVersion=5 minorVersion=7
+2022-03-25 15:46:35.638 INFO  [main] b.service.impl.db.JobDbSchemaManager 236  - performing create on job with resource org/flowable/job/service/db/create/flowable.mysql.create.job.sql
+2022-03-25 15:46:35.640 INFO  [main] b.service.impl.db.JobDbSchemaManager 252  - Found MySQL: majorVersion=5 minorVersion=7
+2022-03-25 15:46:40.340 INFO  [main] service.impl.db.BatchDbSchemaManager 236  - performing create on batch with resource org/flowable/batch/service/db/create/flowable.mysql.create.batch.sql
+2022-03-25 15:46:40.341 INFO  [main] service.impl.db.BatchDbSchemaManager 252  - Found MySQL: majorVersion=5 minorVersion=7
+2022-03-25 15:46:40.800 INFO  [main] ngine.impl.db.ProcessDbSchemaManager 236  - performing create on engine with resource org/flowable/db/create/flowable.mysql.create.engine.sql
+2022-03-25 15:46:40.800 INFO  [main] ngine.impl.db.ProcessDbSchemaManager 252  - Found MySQL: majorVersion=5 minorVersion=7
+2022-03-25 15:46:47.003 INFO  [main] ngine.impl.db.ProcessDbSchemaManager 236  - performing create on history with resource org/flowable/db/create/flowable.mysql.create.history.sql
+2022-03-25 15:46:47.003 INFO  [main] ngine.impl.db.ProcessDbSchemaManager 252  - Found MySQL: majorVersion=5 minorVersion=7
+2022-03-25 15:46:49.046 INFO  [main] owable.engine.impl.ProcessEngineImpl 88   - ProcessEngine default created
+2022-03-25 15:46:49.122 INFO  [main] ngine.impl.cmd.ValidateV5EntitiesCmd 43   - Total of v5 deployments found: 0
