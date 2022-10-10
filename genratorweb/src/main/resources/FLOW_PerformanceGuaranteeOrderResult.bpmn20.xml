@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="FLOW_PerformanceGuaranteeOrderResult" name="履约主流程" isExecutable="true">
+    <documentation>履约主流程</documentation>
+    <startEvent id="startevent1" name="Start" flowable:formFieldValidation="true"/>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="usertask1"/>
+    <userTask id="usertask1" name="投保人申请" flowable:assignee="${acceptId}" flowable:formFieldValidation="true">
+      <documentation>待备案(1/5)</documentation>
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler">
+          <![CDATA[ false ]]>
+        </modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow2" sourceRef="usertask1" targetRef="usertask2"/>
+    <userTask id="usertask2" name="担保机构受理" flowable:assignee="${platformOrgId}" flowable:formFieldValidation="true">
+      <documentation>待备案(2/5)</documentation>
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler">
+          <![CDATA[ false ]]>
+        </modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow3" sourceRef="usertask2" targetRef="exclusivegateway1"/>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"/>
+    <sequenceFlow id="flow6" sourceRef="exclusivegateway1" targetRef="usertask3">
+      <conditionExpression xsi:type="tFormalExpression">
+        <![CDATA[ ${commit} ]]>
+      </conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow5" sourceRef="exclusivegateway1" targetRef="usertask1">
+      <conditionExpression xsi:type="tFormalExpression">
+        <![CDATA[ ${!commit} ]]>
+      </conditionExpression>
+    </sequenceFlow>
+    <userTask id="usertask3" name="投保人确认信息" flowable:assignee="${acceptId}" flowable:formFieldValidation="true">
+      <documentation>待备案(3/5)</documentation>
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler">
+          <![CDATA[ false ]]>
+        </modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow7" sourceRef="usertask3" targetRef="exclusivegateway2"/>
+    <exclusiveGateway id="exclusivegateway2" name="Exclusive Gateway"/>
+    <sequenceFlow id="flow4" sourceRef="exclusivegateway2" targetRef="usertask2">
+      <conditionExpression xsi:type="tFormalExpression">
+        <![CDATA[ ${!commit} ]]>
+      </conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow8" sourceRef="exclusivegateway2" targetRef="usertask4">
+      <conditionExpression xsi:type="tFormalExpression">
+        <![CDATA[ ${commit} ]]>
+      </conditionExpression>
+    </sequenceFlow>
+    <userTask id="usertask4" name="投保人支付" flowable:assignee="${acceptId}" flowable:formFieldValidation="true">
+      <documentation>待备案(4/5)</documentation>
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler">
+          <![CDATA[ false ]]>
+        </modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow9" sourceRef="usertask4" targetRef="usertask5"/>
+    <userTask id="usertask5" name="担保机构支付审核" flowable:assignee="${guaranteeOrgId}" flowable:formFieldValidation="true">
+      <documentation>待备案(5/5)</documentation>
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler">
+          <![CDATA[ false ]]>
+        </modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow10" sourceRef="usertask5" targetRef="exclusivegateway3"/>
+    <exclusiveGateway id="exclusivegateway3" name="Exclusive Gateway"/>
+    <endEvent id="endevent1" name="End"/>
+    <sequenceFlow id="flow11" sourceRef="exclusivegateway3" targetRef="usertask4">
+      <conditionExpression xsi:type="tFormalExpression">
+        <![CDATA[ ${!commit} ]]>
+      </conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow13" sourceRef="exclusivegateway3" targetRef="usertask6">
+      <conditionExpression xsi:type="tFormalExpression">
+        <![CDATA[ ${commit} ]]>
+      </conditionExpression>
+    </sequenceFlow>
+    <userTask id="usertask6" name="投保人信息补录" flowable:assignee="${acceptId}" flowable:formFieldValidation="true">
+      <documentation>待备案(4/5)</documentation>
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler">
+          <![CDATA[ false ]]>
+        </modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow14" sourceRef="usertask6" targetRef="usertask7"/>
+    <userTask id="usertask7" name="担保机构信息补录审核" flowable:assignee="${guaranteeOrgId}" flowable:formFieldValidation="true">
+      <documentation>待备案(5/5)</documentation>
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler">
+          <![CDATA[ false ]]>
+        </modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow15" sourceRef="usertask7" targetRef="exclusivegateway4"/>
+    <exclusiveGateway id="exclusivegateway4" name="Exclusive Gateway"/>
+    <sequenceFlow id="flow16" sourceRef="exclusivegateway4" targetRef="endevent1">
+      <conditionExpression xsi:type="tFormalExpression">
+        <![CDATA[ ${commit} ]]>
+      </conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow17" sourceRef="exclusivegateway4" targetRef="usertask6">
+      <conditionExpression xsi:type="tFormalExpression">
+        <![CDATA[ ${!commit} ]]>
+      </conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_FLOW_PerformanceGuaranteeOrderResult">
+    <bpmndi:BPMNPlane bpmnElement="FLOW_PerformanceGuaranteeOrderResult" id="BPMNPlane_FLOW_PerformanceGuaranteeOrderResult">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="160.0" y="190.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask1" id="BPMNShape_usertask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="240.0" y="180.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask2" id="BPMNShape_usertask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="400.0" y="180.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="540.0" y="187.5"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask5" id="BPMNShape_usertask5">
+        <omgdc:Bounds height="55.0" width="105.0" x="1070.0" y="180.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway3" id="BPMNShape_exclusivegateway3">
+        <omgdc:Bounds height="40.0" width="40.0" x="1220.0" y="187.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="28.0" width="28.0" x="1226.0" y="660.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway2" id="BPMNShape_exclusivegateway2">
+        <omgdc:Bounds height="40.0" width="40.0" x="796.0" y="187.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask3" id="BPMNShape_usertask3">
+        <omgdc:Bounds height="55.0" width="105.0" x="615.0" y="180.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask4" id="BPMNShape_usertask4">
+        <omgdc:Bounds height="55.0" width="105.0" x="890.0" y="180.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask6" id="BPMNShape_usertask6">
+        <omgdc:Bounds height="55.0" width="105.0" x="1187.5" y="315.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask7" id="BPMNShape_usertask7">
+        <omgdc:Bounds height="55.0" width="105.0" x="1187.5" y="435.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway4" id="BPMNShape_exclusivegateway4">
+        <omgdc:Bounds height="40.0" width="40.0" x="1220.0" y="555.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow17" id="BPMNEdge_flow17">
+        <omgdi:waypoint x="1259.442951898968" y="575.5"/>
+        <omgdi:waypoint x="1374.8333740234375" y="575.5"/>
+        <omgdi:waypoint x="1374.8333740234375" y="342.5"/>
+        <omgdi:waypoint x="1292.4499999998636" y="342.5"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow13" id="BPMNEdge_flow13">
+        <omgdi:waypoint x="1240.4293680297399" y="226.51335438335815"/>
+        <omgdi:waypoint x="1240.1016666666667" y="315.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow14" id="BPMNEdge_flow14">
+        <omgdi:waypoint x="1240.0" y="369.95"/>
+        <omgdi:waypoint x="1240.0" y="435.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="1240.0" y="489.95"/>
+        <omgdi:waypoint x="1240.0" y="555.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow16" id="BPMNEdge_flow16">
+        <omgdi:waypoint x="1240.0" y="594.9470570749108"/>
+        <omgdi:waypoint x="1240.0" y="660.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="189.9465536084482" y="205.3180146083297"/>
+        <omgdi:waypoint x="239.9999999999996" y="206.38297872340425"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="344.94999999999385" y="207.5"/>
+        <omgdi:waypoint x="399.9999999999819" y="207.5"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="504.9499999999551" y="207.5"/>
+        <omgdi:waypoint x="540.0" y="207.5"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="815.7802197802198" y="226.73076923076925"/>
+        <omgdi:waypoint x="815.0" y="297.0"/>
+        <omgdi:waypoint x="452.0" y="297.0"/>
+        <omgdi:waypoint x="452.3463687150838" y="234.95000000000002"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="560.0" y="187.5"/>
+        <omgdi:waypoint x="560.0" y="130.0"/>
+        <omgdi:waypoint x="292.0" y="130.0"/>
+        <omgdi:waypoint x="292.3225806451613" y="180.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="579.9322192513368" y="207.5"/>
+        <omgdi:waypoint x="615.0" y="207.5"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="719.9499999999927" y="207.32323232323233"/>
+        <omgdi:waypoint x="796.0671140939597" y="207.0669463087248"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="1174.9499999999919" y="207.27659574468086"/>
+        <omgdi:waypoint x="1220.084745762712" y="207.0845338983051"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="835.8636703383162" y="207.07854330708665"/>
+        <omgdi:waypoint x="889.999999999997" y="207.29249011857706"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
+        <omgdi:waypoint x="1240.0" y="187.0"/>
+        <omgdi:waypoint x="1240.0" y="126.0"/>
+        <omgdi:waypoint x="943.0" y="126.0"/>
+        <omgdi:waypoint x="942.6684049079755" y="180.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
+        <omgdi:waypoint x="994.9499999999999" y="207.5"/>
+        <omgdi:waypoint x="1069.9999999999038" y="207.5"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

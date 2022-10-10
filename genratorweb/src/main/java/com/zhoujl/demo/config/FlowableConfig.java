@@ -42,6 +42,7 @@ public class FlowableConfig implements EngineConfigurationConfigurer<SpringProce
                 .setJdbcUsername(username)
                 .setJdbcPassword(password)
                 .setJdbcDriver(driver)
+                //如果数据库中的表结构不在就新自动建
                 .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
         ProcessEngine processEngine = cfg.buildProcessEngine();
         return processEngine;

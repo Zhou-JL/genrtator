@@ -63,12 +63,23 @@
             <version>1.2.17</version>
         </dependency>
         <dependency>
-
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.49</version>
             <scope>runtime</scope>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>org.slf4j</groupId>-->
+<!--            <artifactId>slf4j-log4j12</artifactId>-->
+<!--            <version>1.7.25</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.slf4j</groupId>-->
+<!--            <artifactId>slf4j-log4j12</artifactId>-->
+<!--            <version>1.7.25</version>-->
+<!--        </dependency>-->
+
 
 
         <dependency>
@@ -100,7 +111,7 @@
 
         <!--https://www.jianshu.com/p/fa5ef558b286-->
         <!--https://www.hutool.cn/-->
-        <!--工具包，日期，大小写，字符串，获取classPath下的文件，数字处理工具类，JavaBean的工具类与map转换，集合操作的工具类，加密，验证码-->
+        <!--工具包，日期，大小写，字符串，获取classPath下的文件，数字处理工具类，JavaBean的工具类与map转换，集合操作的工具类，加密，验证码，雪花算法等-->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>

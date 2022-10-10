@@ -72,6 +72,8 @@ public class FlowableController {
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("qingjiaApply", variables);
         System.out.println("processInstance.getId(): " + processInstance.getId());        //流程定义id
         System.out.println("processInstance.getDeploymentId(): " + processInstance.getDeploymentId());    //部署流程id
+        System.out.println("processInstance.getProcessDefinitionId(): " + processInstance.getProcessDefinitionId());    //部署流程id
+        System.out.println("processInstance.getProcessDefinitionKey(): " + processInstance.getProcessDefinitionKey());    //部署流程的key
         return processInstance.getId();
     }
 
@@ -123,7 +125,7 @@ public class FlowableController {
 
 
     /**
-     * 李四或者王五，或者赵会计获取审批管理列表
+     * 李四或者王五，或者赵会计获取审批管理列表,相当于代办
      */
     @GetMapping(value = "/list")
     @ApiOperation(value = "李四或者王五，或者赵会计获取审批管理列表")
@@ -131,7 +133,7 @@ public class FlowableController {
         TaskService taskService = processEngine.getTaskService();
         List<Task> tasks = taskService.createTaskQuery().taskAssignee(name).orderByTaskCreateTime().desc().list();
         for (Task task : tasks) {
-            System.out.println(task.toString());
+            System.out.println(task.getProcessInstanceId());
         }
         return tasks.toArray().toString();
     }
@@ -287,7 +289,5 @@ public class FlowableController {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             throw new RuntimeException("fail");
         }
-
-
     }
 }
