@@ -40,7 +40,7 @@ public class FlowableController1 {
     public String deploy() {
         RepositoryService repositoryService = processEngine.getRepositoryService();
         Deployment deployment = repositoryService.createDeployment()
-                .addClasspathResource("traddingGuarrentOrder.bpmn20.xml")
+                .addClasspathResource("processes/traddingGuarrentOrder.bpmn20.xml")
                 .name("保函申请")
                 .deploy();
         System.out.println("deployment.getId(): " + deployment.getId());       //部署id,删除部署流程是需要
@@ -80,7 +80,7 @@ public class FlowableController1 {
         //获取当前流程实例的所有变量
         Map<String, Object> processVariables = task.getProcessVariables();
         //张三提出请假两天
-        processVariables.put("orderId", 11);
+        processVariables.put("reson", "我想请3天假");
         taskService.complete(task.getId(), processVariables);
         return "success";
 
@@ -102,7 +102,9 @@ public class FlowableController1 {
 //        获取当前流程实例的所有变量
         Map<String, Object> processVariables = task.getProcessVariables();
         //张三提出请假两天
-        processVariables.put("flag", flag);
+        processVariables.put("flag", 1);
+        processVariables.put("reson1", "同意了");
+
         taskService.complete(task.getId(), processVariables);
         return "success";
     }

@@ -14,7 +14,7 @@ dubbo:
   application:
     name: provider-genrator
   registry:
-    address: zookeeper://47.105.161.220:2181
+    address: zookeeper://60.205.4.182:2181
   scan:
     base-packages: com.zhoujl.demo.rpcservice.service
   protocol:

@@ -9,7 +9,6 @@ import org.flowable.engine.repository.Deployment;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
 import org.flowable.task.api.history.HistoricTaskInstance;
-import org.flowable.variable.api.history.HistoricVariableInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,7 +45,7 @@ public class FlowableController {
     public String deploy() {
         RepositoryService repositoryService = processEngine.getRepositoryService();
         Deployment deployment = repositoryService.createDeployment()
-                .addClasspathResource("qingjiaApply.bpmn20.xml")
+                .addClasspathResource("processes/qingjiaApply.bpmn20.xml")
                 .name("保函申请单")
                 .deploy();
         System.out.println("deployment.getId(): " + deployment.getId());       //部署id,删除部署流程是需要

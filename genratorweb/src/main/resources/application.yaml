@@ -8,9 +8,9 @@ spring:
   application:
     name: genertator
   datasource:
-    url: jdbc:mysql://47.105.161.220:3306/shirojwt?useSSL=false&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://60.205.4.182:3306/shirojwt?useSSL=false&useUnicode=true&characterEncoding=utf-8
     username: root
-    password: Zhou236513
+    password: Zhou%236513
     # 使用Druid数据源
 #    type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
@@ -60,7 +60,7 @@ logging:
 ##系统变量
 finance:
   file-server:
-    url: http://47.105.161.220:8010
+    url: http://60.205.4.182:8010
     public-file-url: /public/finance-public
     upload-file-url: /upload/finance-upload
 
@@ -72,7 +72,7 @@ dubbo:
   application:
     name: consumer-web
   registry:
-    address: zookeeper://47.105.161.220:2181
+    address: zookeeper://60.205.4.182:2181
   protocol:
     port: 20880
   scan:
@@ -80,9 +80,21 @@ dubbo:
 
 
 flowable:
-  #关闭定时任务JOB
+  #开发时关闭定时任务JOB
   async-executor-activate: false
-  database-schema-update: false
-  process:
-    definition-cache-limit: 100
+  #flase：       默认值。在启动时，会对比数据库表中保存的版本，如果没有表或者版本不匹配，将抛出异常。（生产环境常用）
+  #true：        会对数据库中所有表进行更新操作。如果表不存在，则自动创建。（开发时常用）
+  #create_drop： 在启动时创建表，在关闭时删除表（必须手动关闭引擎，才能删除表）。（单元测试常用）
+  #drop-create： 在启动时删除原来的旧表，然后在创建新表（不需要手动关闭引擎）。
+  database-schema-update: true
+  # 在项目启动时，去检查文件目录是否有对应的流程文件，默认值为 true 表示如果有流程文件就自动部署，false 表示不检查，那么也就不会自动部署
+  check-process-definitions: true
+  #指定流程图的位置
+  process-definition-location-prefix: classpath*:/processes/
+  idm:
+    enabled: false     #关闭flowable的权限认证模块
 
+
+
+#http://60:205:4:182:8010/public/finance-public/001/202311/1699931187738000:jpg
+#http://60:205:4:182:8010/download/public/finance-public/001/202311/1699931187738000:jpg

@@ -43,7 +43,7 @@ public class FlowableController3 {
     public String deploy() {
         RepositoryService repositoryService = processEngine.getRepositoryService();
         Deployment deployment = repositoryService.createDeployment()
-                .addClasspathResource("FLOW_PerformanceGuaranteeOrderResult.bpmn20.xml")
+                .addClasspathResource("processes/FLOW_PerformanceGuaranteeOrderResult.bpmn20.xml")
                 .name("履约保函申请")
                 .deploy();
         System.out.println("deployment.getId(): " + deployment.getId());       //部署id,删除部署流程是需要
